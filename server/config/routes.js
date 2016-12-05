@@ -106,6 +106,9 @@ exports.configure = function configure(app) {
   app.get('/system/stream', system.stream);
   app.get('/system/information', system.info);
 
+  app.get('/system/time', system.requestTime);
+  app.post('/system/time', system.setTime);
+
   // dashbord stats
   app.get('/patients/stats', stats.patients);
   app.get('/invoices/stats', stats.invoices);

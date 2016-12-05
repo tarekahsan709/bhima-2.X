@@ -16,6 +16,9 @@ function SystemService($http, util) {
   service.events = events;
   service.stream = [];
 
+  service.requestTime = requestTime;
+  service.setTime = setTime;
+
   function information() {
     return $http.get(baseUrl.concat('/information'))
       .then(util.unwrapHttpResponse);
@@ -42,6 +45,16 @@ function SystemService($http, util) {
 
   function handleOpenEvent(event) {
     console.log('Connection was open.');
+  }
+
+  function requestTime() {
+    return $http.get(baseUrl.concat('/time'))
+      .then(util.unwrapHttpResponse);
+  }
+
+  function setTime(timeParams) {
+    return $http.post(baseUrl.concat('/time'), timeParams)
+      .then(util.unwrapHttpResponse);
   }
 
   /*

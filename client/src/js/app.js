@@ -205,6 +205,12 @@ function bhimaConfig($stateProvider, $urlMatcherFactoryProvider) {
     templateUrl: 'partials/admin/transaction_type/transaction_type.html'
   })
 
+  .state('systemTime', {
+    url : '/system/time',
+    controller : 'TimeConfigurationController as TimeCtrl',
+    templateUrl : 'partials/system/time.html'
+  })
+
   .state('403', {
     templateUrl : 'partials/errors/403.html'
   })
@@ -342,9 +348,7 @@ function constantConfig() {
       CONTACT_EMAIL : 'developers@imaworldhealth.org',
     },
     dates : {
-      minDOB : new Date('1900-01-01'),
-    },
-    lengths : {
+      minDOB : new Date('1900-01-01'), }, lengths : {
       maxTextLength : 1000,
       minDecimalValue: 0.0001
     },

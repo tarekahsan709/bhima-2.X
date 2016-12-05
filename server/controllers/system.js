@@ -16,6 +16,7 @@ const os = require('os');
 const db = require('../lib/db');
 const Topic = require('../lib/topic');
 const pkg = require('../../../package.json');
+const exec = require('child_process').exec;
 
 // GET system/stream
 exports.stream = stream;
@@ -26,6 +27,9 @@ exports.events = events;
 // GET system/info
 exports.info = info;
 
+// GET system/time
+exports.requestTime = requestTime;
+exports.setTime = setTime;
 /**
  * @method stream
  *
@@ -79,6 +83,39 @@ function events(req, res, next) {
   })
   .catch(next)
   .done();
+}
+
+/**
+ * @method requestTime
+ *
+ * GET /system/time
+ */
+function requestTime(req, res, next) {
+  res.status(200).json({
+    currentTime : new Date()
+  });
+}
+
+/**
+ * @method setTime
+ *
+ * POST /system/time
+ *
+ * This method should only be used as a last resort -
+ * if the server's internal clock is not functioning correctly
+ */
+function setTime(req, res, next) {
+
+  // string formatted by moment on the client?
+  var date = req.body.requestedDate;
+
+  exec(`date -s "${date}"`, function (err, result) {
+    if (err) {
+      res.status(400).send(err);
+      return;
+    }
+    res.status(200).send(result);
+  });
 }
 
 // send operating system information

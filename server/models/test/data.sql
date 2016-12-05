@@ -55,7 +55,8 @@ INSERT INTO unit VALUES
   (149, 'Income Expenses', 'TREE.INCOME_EXPENSE', 'The Report of income and expenses', 144, '/partials/finance/income_expense', '/reports/income_expense'),
   (150, 'Balance Report', 'TREE.BALANCE', 'Balance report module', 144, 'null', '/reports/balance'),
   (151, 'Customer Debts', 'TREE.CUSTOMER_DEBTS', 'Customer Debts', 144, '/partials/finance/reports/agedDebtors', '/reports/agedDebtors'),
-  (152, 'Report accounts', 'TREE.REPORT_ACCOUNTS', 'The Report accounts', 144, '/partials/finance/report_accounts', '/reports/report_accounts');
+  (152, 'Report accounts', 'TREE.REPORT_ACCOUNTS', 'The Report accounts', 144, '/partials/finance/report_accounts', '/reports/report_accounts'),
+  (153, 'Time configuration', 'TREE.TIME_CONFIGURATION', 'Configuration for server time', 1, 'partials/system/time', '/system/time');
 
 
 -- Reserved system account type
@@ -271,7 +272,9 @@ INSERT INTO permission (unit_id, user_id) VALUES
 
 
 -- Report Customer Debts
-(151,1);
+(151,1),
+
+(153, 1);
 
 -- Fiscal Year 2015
 SET @fiscalYear2015 = 0;

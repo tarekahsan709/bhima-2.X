@@ -1400,7 +1400,8 @@
     "TRANSACTION_TYPE"           : "Transaction Types",
     "USERS"                      : "Users",
     "VOUCHER_REGISTRY"           : "Voucher Registry",
-    "AGED_DEBTORS"               : "Aged Debtors"
+    "AGED_DEBTORS"               : "Aged Debtors",
+    "TIME_CONFIGURATION"         : "Server Time Configuration"
   },
   "VILLAGE": {
     "CONFIG"       : "Village/Township Manager Configuration",
@@ -1473,5 +1474,9 @@
     "MEDICINE_DISTRIBUTIONS" : "Medicine Distributions",
     "LOGINS" : "Logins",
     "PURCHASES" : "Purchases"
+  },
+  "TIME_CONFIG" : { 
+    "CURRENT_TIME" : "Current Server Time",
+    "SET_TIME" : "Set Server Time"
   }
 }
