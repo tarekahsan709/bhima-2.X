@@ -1425,6 +1425,7 @@
     "SIMPLE_VOUCHER"             : "Bordereau de transfert",
     "STOCK"                      : "Stock",
     "SUBSIDY"                    : "Subvention",
+    "TIME_CONFIGURATION"         : "Configuration de la date et heure",
     "TRANSACTION_TYPE"           : "Types de Transaction",
     "SUBSIDY"                    : "Gestion des subventions",
     "USERS"                      : "Utilisateurs",
@@ -1503,6 +1504,12 @@
     "MEDICINE_DISTRIBUTIONS" : "Distribution des medicaments",
     "LOGINS" : "Connexion",
     "PURCHASES" : "Achats"
+  },
+  "TIME_CONFIG" : {
+    "CURRENT_TIME" : "Temps du serveur en cours",
+    "SET_TIME" : "Configurer le temps du serveur",
+    "SET_DATE" : "Configurer la date du serveur",
+    "SUCCESS" : "Configuration de la date du serveur reussie"
   }
 
 }
