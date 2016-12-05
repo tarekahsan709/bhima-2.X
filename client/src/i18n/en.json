@@ -1475,8 +1475,10 @@
     "LOGINS" : "Logins",
     "PURCHASES" : "Purchases"
   },
-  "TIME_CONFIG" : { 
+  "TIME_CONFIG" : {
     "CURRENT_TIME" : "Current Server Time",
-    "SET_TIME" : "Set Server Time"
+    "SET_TIME" : "Set Server Time",
+    "SET_DATE" : "Set Server Date",
+    "SUCCESS" : "Successfully reset the server time."
   }
 }

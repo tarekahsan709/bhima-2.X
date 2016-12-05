@@ -17,6 +17,7 @@ const db = require('../lib/db');
 const Topic = require('../lib/topic');
 const pkg = require('../../../package.json');
 const exec = require('child_process').exec;
+const moment = require('moment');
 
 // GET system/stream
 exports.stream = stream;
@@ -107,13 +108,14 @@ function requestTime(req, res, next) {
 function setTime(req, res, next) {
 
   // string formatted by moment on the client?
-  var date = req.body.requestedDate;
+  var date = moment(req.body.requestedDate).format('ddd DD-MMM-YYYY h:mm:ss ');
 
   exec(`date -s "${date}"`, function (err, result) {
     if (err) {
       res.status(400).send(err);
       return;
     }
+
     res.status(200).send(result);
   });
 }
