@@ -33,9 +33,6 @@ function TimeConfigurationController(System, moment, Notify) {
     // send back the time as moment composed object
     var date = moment(vm.userDate);
 
-    // remove time features
-    date.startOf('day');
-
     var time = moment(vm.userTime).format('mm:ss:SS');
     var timeArray = time.split(':');
 
