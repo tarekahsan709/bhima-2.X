@@ -304,6 +304,12 @@
     "SET_AS"              : "Set as",
     "ON"                  : "on"
   },
+  "FEE_CENTER" : {
+    "ADDING_FEE_CENTER" : "Adding Fee Center",
+    "PRINCIPAL"     : "Main",
+    "RECORD_SAME"   : "No edited data",
+    "UPDATING_FEE_CENTER" : "Updating"
+  },
   "FISCAL": {
     "ALREADY_CLOSED"        : "Already closed",
     "CAN_NOT_DELETE_FY"     : "Can not delete this fiscal year because there are transactions of which were made",
@@ -402,6 +408,7 @@
       "MISSING"             : "This form is missing required fields (marked in red).",
       "MISSING_CASHBOX_ID"  : "Missing Cashbox",
       "MISSING_DEBTOR_ID"   : "Identifying missing Debtor",
+      "NO_FEE_CENTER"       : "Fee center not found or not defined",
       "RECORD_ERROR"        : "Please resolve any errors on the form (marked in red).",
       "REQUIRED"            : "This value is required.",
       "INVALID"             : "invalid data"
@@ -474,6 +481,7 @@
       "APPLY_SUBSIDIES"        : "Apply subsidies",
       "ASSET"                  : "Asset",
       "AUTHOR"                 : "Author",
+      "ASSIGN"                 : "Assign",
       "AUXILIARY"              : "Auxiliary",
       "BALANCE"                : "Balance",
       "BALANCE_SECTION"        : "Balance Sheet Section",
@@ -554,6 +562,7 @@
       "EXPENSE"                : "Expenses",
       "FATHER_NAME"            : "Father's Name",
       "FAX"                    : "Fax",
+      "FEE_CENTER"             : "Fee Center",
       "FEMALE"                 : "Female",
       "FINANCIAL_DETAIL"       : "Current balance, the posting journal is included:",
       "FINANCIAL_STATUS"       : "Financial Status",
@@ -618,6 +627,7 @@
       "NO"                     : "No",
       "NO_DEBTOR_GROUPS"      : "No debtor groups",
       "NOTES"                  : "Note(s)",
+      "NOTE"                  : "Note",
       "NO_DISTRIBUTABLE"       : "Not distributable",
       "OF"                     : "Of",
       "OPTIONAL_INFO"          : "Optional Information",
@@ -797,7 +807,7 @@
       "ACCOUNT_TYPE"       : "Select Account Type",
       "BALANCE_SECTION"    : "Select Balance Sheet Section",
       "CASHBOX"            : "Select a cashbox",
-      "COST_CENTER"        : "Select a Cost Center",
+      "FEE_CENTER"         : "Select a fee Center",
       "COUNTRY"            : "Select Country",
       "CREDITOR"           : "Select a Creditor",
       "CREDITOR_GROUP"     : "Select a Creditor Group",
@@ -814,7 +824,6 @@
       "LANGUAGE"           : "Select a Language",
       "LAST_PAGE"          : "Last Page Visited",
       "PRICE_LIST"         : "Select a price list",
-      "PROFIT_CENTER"      : "Select profit center",
       "PROJECT"            : "Select a Project",
       "PROJECTS"           : "Select Projects",
       "PROVINCE"           : "Select a Province",
@@ -1385,6 +1394,7 @@
       "ERROR_TYPE"         : "Error Type",
       "ENTERPRISE_ID"      : "ID Enterprise",
       "EXCHANGE_RATE"      : "Exchange Rate",
+      "FEE_CENTER"         : "Fee Center",
       "FILTERING": {
         "LABEL"   : "Filter"
       },
@@ -1526,6 +1536,7 @@
     "EMPLOYEE"                   : "Employee",
     "ENTERPRISE"                 : "Enterprise",
     "EXCHANGE"                   : "Exchange Rate",
+    "FEE_CENTER"                 : "Fee Center",
     "FINANCE"                    : "Finance",
     "FISCAL_YEAR"                : "Fiscal Year",
     "FONCTION"                   : "Job titles management",

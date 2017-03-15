@@ -1,0 +1,36 @@
+<div class="flex-header">
+  <div class="bhima-title">
+    <ol class="headercrumb">
+      <li class="static" translate>TREE.FINANCE</li>
+      <li class="title" translate>TREE.FEE_CENTER</li>
+    </ol>
+
+    <div class="toolbar">
+      <div class="toolbar-item">
+        <button type="button"
+          class="btn btn-default"
+          data-method="create"
+          ui-sref="feeCenter.create">
+          <i class="fa fa-plus-circle"></i> {{ 'FORM.LABELS.ADD' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex-content">
+  <div class="container-fluid">
+    <div
+      id="feeCenterListGrid"
+      class="grid-full-height"
+      ui-grid="FeeCenterCtrl.gridOptions"
+      ui-grid-auto-resize
+      ui-grid-resize-columns>
+        <bh-grid-loading-indicator
+          loading-state="FeeCenterCtrl.loading"
+          empty-state="FeeCenterCtrl.gridOptions.data.length === 0"
+          error-state="FeeCenterCtrl.hasError">
+        </bh-grid-loading-indicator>
+    </div>
+  </div>
+</div>

@@ -321,45 +321,43 @@ CREATE TABLE `fee_center` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `project_id` smallint(5) unsigned NOT NULL,
   `label` varchar(100) NOT NULL,
-  `is_cost` tinyint(1) DEFAULT 0,
   `is_principal` tinyint(1) DEFAULT 0,
   `note` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `fee_center_1` (`label`),
   KEY `project_id` (`project_id`),
-  FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  INDEX `fee_center_index_1` (`is_cost`)
+  FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `cost_assignation`;
+DROP TABLE IF EXISTS `fee_assignation`;
 
-CREATE TABLE `cost_assignation` (
+CREATE TABLE `fee_assignation` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `auxiliary_cost_id` smallint(6) NOT NULL,
+  `auxiliary_fee_id` smallint(6) NOT NULL,
   `cost` float DEFAULT 0,
   `period_id` mediumint(8) UNSIGNED NOT NULL,
   `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `note` text,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `cost_assignation_1` (`auxiliary_cost_id`, `period_id`),
-  KEY `auxiliary_cost_id` (`auxiliary_cost_id`),
+  UNIQUE KEY `cost_assignation_1` (`auxiliary_fee_id`, `period_id`),
+  KEY `auxiliary_fee_id` (`auxiliary_fee_id`),
   KEY `period_id` (`period_id`),
-  FOREIGN KEY (`auxiliary_cost_id`) REFERENCES `fee_center` (`id`),
+  FOREIGN KEY (`auxiliary_fee_id`) REFERENCES `fee_center` (`id`),
   FOREIGN KEY (`period_id`) REFERENCES `period` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `cost_assignation_item`;
+DROP TABLE IF EXISTS `fee_assignation_item`;
 
-CREATE TABLE `cost_assignation_item` (
+CREATE TABLE `fee_assignation_item` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `cost_assignation_id` int(10) unsigned NOT NULL,
-  `principal_cost_id` smallint(6) NOT NULL,
+  `fee_assignation_id` int(10) unsigned NOT NULL,
+  `principal_fee_id` smallint(6) NOT NULL,
   `allocated_value` float DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `cost_assignation_id` (`cost_assignation_id`),
-  KEY `principal_cost_id` (`principal_cost_id`),
-  FOREIGN KEY (`cost_assignation_id`) REFERENCES `cost_assignation` (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`principal_cost_id`) REFERENCES `fee_center` (`id`) ON DELETE CASCADE
+  KEY `fee_assignation_id` (`fee_assignation_id`),
+  KEY `principal_fee_id` (`principal_fee_id`),
+  FOREIGN KEY (`fee_assignation_id`) REFERENCES `fee_assignation` (`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`principal_fee_id`) REFERENCES `fee_center` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -1586,17 +1584,14 @@ CREATE TABLE `service` (
   `id` smallint(5) unsigned not null auto_increment,
   `enterprise_id` SMALLINT(5) UNSIGNED NOT NULL,
   `name` VARCHAR(80) NOT NULL,
-  `cc_id` SMALLINT(6) DEFAULT NULL,
-  `pc_id` SMALLINT(6) DEFAULT NULL,
+  `fc_id` SMALLINT(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `service_1` (`name`),
-  UNIQUE KEY `service_2` (`cc_id`, `pc_id`),
+  UNIQUE KEY `service_2` (`fc_id`),
   KEY `enterprise_id` (`enterprise_id`),
-  KEY `cc_id` (`cc_id`),
-  KEY `pc_id` (`pc_id`),
+  KEY `fc_id` (`fc_id`),
   FOREIGN KEY (`enterprise_id`) REFERENCES enterprise (`id`),
-  FOREIGN KEY (`cc_id`) REFERENCES `fee_center` (`id`) ON UPDATE CASCADE,
-  FOREIGN KEY (`pc_id`) REFERENCES `fee_center` (`id`) ON UPDATE CASCADE
+  FOREIGN KEY (`fc_id`) REFERENCES `fee_center` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 

@@ -14,6 +14,7 @@ const db = require('../../lib/db');
 const NotFound = require('../../lib/errors/NotFound');
 const FilterParser = require('../../lib/filter');
 
+
 /**
 * Returns an array of fee centers
 *
@@ -26,17 +27,37 @@ function list (req, res, next) {
 
   const ordering = 'ORDER BY fc.label';
   const is_detailed = Boolean(Number(req.query.detailed));
-  const detailed = is_detailed ? ', fc.note, fc.is_principal, fc.project_id, fc.is_cost, p.name, p.abbr, p.enterprise_id, p.zs_id ' : '';
-
+  const detailed = is_detailed ? ', fc.note, fc.is_principal, fc.project_id, p.name, p.abbr, p.enterprise_id, p.zs_id, tt.value ' : '';
   const sql =
-    `SELECT fc.id, fc.label, fc.is_cost ${detailed} FROM fee_center AS fc JOIN project as p on fc.project_id = p.id`;
+    `
+      SELECT 
+        fc.id, fc.label ${detailed} 
+      FROM 
+        fee_center AS fc 
+      JOIN 
+        project AS p ON fc.project_id = p.id
+      LEFT JOIN
+        (
+          SELECT
+           IFNULL(IF(t.is_principal = 1, t.result, t.result * -1), 0) AS value, t.id 
+          FROM
+           (
+             SELECT
+              SUM(gl.credit_equiv - gl.debit_equiv) AS result, f.id, f.is_principal
+             FROM
+              general_ledger AS gl
+             JOIN
+              fee_center AS f ON gl.fc_id = f.id
+             GROUP BY gl.fc_id
+           ) AS t
+        ) AS tt ON tt.id = fc.id
+    `;
 
-  const notInStatement = `(fc.id NOT IN (SELECT DISTINCT s.cc_id FROM service AS s WHERE NOT ISNULL(s.cc_id) UNION SELECT DISTINCT s.pc_id FROM service AS s WHERE NOT ISNULL(s.pc_id)) AND ?)`;
+  const notInStatement = `(fc.id NOT IN (SELECT DISTINCT s.fc_id FROM service AS s WHERE NOT ISNULL(s.fc_id)) AND ?)`;
 
   let filterParser = new FilterParser(req.query, { tableAlias : 'fc' });
 
   filterParser.equals('is_principal');
-  filterParser.equals('is_cost');
   filterParser.custom('available', notInStatement, req.query.available);
   filterParser.setOrder(ordering);
 
@@ -90,14 +111,12 @@ function update (req, res, next) {
 
   delete queryData.id;
 
-
    db.exec(updateFeeCenterQuery, [queryData, feeCenterId])
     .then(function (res) {
 
       if(res.affectedRows === 0){
         throw new NotFound(`Could not update a fee center with id ${feeCenterId}`);
       }
-
       return lookupFeeCenter(feeCenterId);
     })
     .then(function (feeCenter) {
@@ -158,12 +177,12 @@ function detail(req, res, next) {
 function lookupFeeCenter(id) {
 
   const sql =
-    'SELECT fc.id, fc.label, fc.is_cost, fc.note, fc.is_principal, fc.project_id FROM fee_center AS fc WHERE fc.id = ?';
+    'SELECT fc.id, fc.label, fc.note, fc.is_principal, fc.project_id FROM fee_center AS fc WHERE fc.id = ?';
 
   return db.one(sql, id)
     .then(function (rows) {
       if (rows.length === 0) {
-        throw new NotFound(`Could not find a fee center with id ${id}`);
+        throw new NotFound(`Could not find a fee center with id ${id}`, 'FORM.ERRORS.NO_FEE_CENTER');
       }
       return rows;
     });
@@ -171,7 +190,6 @@ function lookupFeeCenter(id) {
 
 /**
 * Return a fee cost value by scanning the general ledger
-*
 *
 * @example
 * // GET /fee_centers/:id/value : returns a value of the fee center
@@ -183,15 +201,15 @@ function getFeeValue (req, res, next){
   lookupFeeCenter(req.params.id)
     .then(function (){
 
-      //The value will be multiplied by -1 if the fee center has not is_cost property checked
+      //The value will be multiplied by -1 if the fee center has not is_principal property checked
       const sql =
         `
         SELECT
-          IFNULL(IF(t.is_cost = 1, value, value * -1), 0) AS value, t.id
+          IFNULL(IF(t.is_principal = 1, value, value * -1), 0) AS value, t.id
         FROM
           (
             SELECT
-              SUM(gl.debit_equiv - gl.credit_equiv) AS value, f.is_cost, f.id
+              SUM(gl.credit_equiv - gl.debit_equiv) AS value, f.id, f.is_principal
             FROM
               general_ledger AS gl
             JOIN
@@ -201,10 +219,10 @@ function getFeeValue (req, res, next){
           ) AS t;
          `;
 
-      return db.one(sql, req.params.id);
+      return db.exec(sql, req.params.id);
     })
     .then(function (result){
-      res.status(200).json(result);
+      res.status(200).json(result[0]);
     })
     .catch(next)
     .done();

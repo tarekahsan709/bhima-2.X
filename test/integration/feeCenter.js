@@ -7,7 +7,6 @@ describe('(/fee_centers) The fee center API', function () {
   const newFeeCenter = {
     project_id : 1,
     label : 'tested fee center',
-    is_cost : 1,
     is_principal : 1,
     note : 'test inserted'
   };
@@ -15,7 +14,7 @@ describe('(/fee_centers) The fee center API', function () {
   const DELETABLE_FEE_CENTER_ID = 3;
   const FETCHABLE_FEE_CENTER_ID = 1;
   const responseKeys = [
-    'project_id', 'id', 'label', 'is_cost', 'note', 'is_principal'
+    'project_id', 'id', 'label', 'note', 'is_principal'
   ];
   let invalidFeeCenter = null;
 
@@ -33,19 +32,11 @@ describe('(/fee_centers) The fee center API', function () {
       .then(function (res) {
         helpers.api.listed(res, 7);
       })
-     .catch(helpers.handler);
+      .catch(helpers.handler);
   });
 
   it('GET /fee_centers?available=1 returns a list of available fee centers', function () {
     return agent.get('/fee_centers?available=1')
-      .then(function (res) {
-        helpers.api.listed(res, 1);
-      })
-     .catch(helpers.handler);
-  });
-
-  it('GET /fee_centers?is_cost=1 returns a list of fee centers by filtering only cost center', function () {
-    return agent.get('/fee_centers?is_cost=1')
       .then(function (res) {
         helpers.api.listed(res, 4);
       })
@@ -55,15 +46,15 @@ describe('(/fee_centers) The fee center API', function () {
   it('GET /fee_centers?available=1&detailed=1 returns a detailed list of available fee centers', function () {
     return agent.get('/fee_centers?available=1&detailed=1')
       .then(function (res) {
-        helpers.api.listed(res, 1);
+        helpers.api.listed(res, 4);
       })
-     .catch(helpers.handler);
+      .catch(helpers.handler);
   });
 
-  it('GET /fee_centers?is_cost=1&is_principal=1 returns a list of principal fee center which are cost', function () {
-    return agent.get('/fee_centers?is_cost=1&is_principal=1')
+  it('GET /fee_centers?is_principal=1 returns a list of principal fee center', function () {
+    return agent.get('/fee_centers?is_principal=1')
       .then(function (res) {
-        helpers.api.listed(res, 3);
+        helpers.api.listed(res, 6);
       })
       .catch(helpers.handler);
   });

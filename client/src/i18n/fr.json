@@ -306,6 +306,12 @@
     "SET_AS"              : "Defini comme",
     "ON"                  : "sur"
   },
+  "FEE_CENTER" : {
+    "ADDING_FEE_CENTER" : "Ajout Centre Frais",
+    "PRINCIPAL"     : "Principal",
+    "RECORD_SAME"   : "Aucune donnee n'a ete modifiee",
+    "UPDATING_FEE_CENTER" : "Modification"
+  },
   "FISCAL": {
     "ALREADY_CLOSED"        : "A déjà été cloturé",
     "CAN_NOT_DELETE_FY"     : "Impossible de supprimer cette année fiscale car il en existe des transanctions qui ont été faite",
@@ -404,6 +410,7 @@
       "MISSING"            : "Informations manquantes",
       "MISSING_CASHBOX_ID" : "Caisse non definie",
       "MISSING_DEBTOR_ID"  : "Identifiant Debiteur manquant",
+      "NO_FEE_CENTER"      : "Le centre de frai inexistent ou non defini",
       "RECORD_ERROR"       : "S'il vous plaît, veuiller résoudre les erreurs sur le formulaire. (Marqués en rouge)",
       "REQUIRED"           : "Cette valeur est requise.",
       "INVALID"            : "Donnees Invalides"
@@ -475,6 +482,7 @@
       "APPLY_SUBSIDIES"        : "Appliquer subvention",
       "ASSET"                  : "Actif",
       "AUTHOR"                 : "Auteur",
+      "ASSIGN"                 : "Assigner",
       "AUXILIARY"              : "Auxilliaire",
       "BALANCE"                : "Balance",
       "BALANCE_SECTION"        : "Section du Bilan",
@@ -555,6 +563,7 @@
       "EXPENSE"                : "Dépenses",
       "FATHER_NAME"            : "Nom du Père",
       "FAX"                    : "Fax",
+      "FEE_CENTER"             : "Centre de frai",
       "FEMALE"                 : "Femme",
       "FINANCIAL_DETAIL"       : "Balance actuelle, journal de saisie inclue :",
       "FINANCIAL_STATUS"       : "Situation Financière",
@@ -617,8 +626,9 @@
       "NB_MONTH"               : "Nombre de mois",
       "NB_SPOUSE"              : "Nombre epoux (se)",
       "NO"                     : "Non",
+      "NOTE"                   : "Note",
       "NOTES"                  : "Note(s)",
-      "NO_DEBTOR_GROUPS"      : "Aucun groupes débiteurs",
+      "NO_DEBTOR_GROUPS"       : "Aucun groupes débiteurs",
       "NO_DISTRIBUTABLE"       : "Non distribuable",
       "OF"                     : "De",
       "ON_DELIVERY"            : "Lors de la delivarance",
@@ -799,7 +809,7 @@
       "ACCOUNT_TYPE"       : "Sélectionner Type de Compte",
       "BALANCE_SECTION"    : "Sélectionner la section du bilan",
       "CASHBOX"            : "Sélectionner une caisse",
-      "COST_CENTER"        : "Sélectionner centre de cout",
+      "FEE_CENTER"         : "Sélectionner centre de frai",
       "COUNTRY"            : "Sélectionner pays",
       "CREDITOR"           : "Sélectionner un Créditeur",
       "CREDITOR_GROUP"     : "Sélectionner Groupe de créditeurs",
@@ -816,7 +826,6 @@
       "LANGUAGE"           : "Sélection une langue",
       "LAST_PAGE"          : "La dernière page visitée",
       "PRICE_LIST"         : "Sélectionner la liste de prix",
-      "PROFIT_CENTER"      : "Sélectionner centre profit",
       "PROJECT"            : "Sélectionner projet",
       "PATIENT_GROUP"      : "Sélectionner une groupe des patients",
       "PROVINCE"           : "Sélectionner une province",
@@ -1405,6 +1414,7 @@
       "ENTERPRISE_ID"      : "ID enterprise",
       "ERROR_TYPE"         : "Type d'erreur",
       "EXCHANGE_RATE"      : "Taux de change",
+      "FEE_CENTER"         : "Centre de frai",
       "FILTERING": {
         "LABEL"   : "Filtre"
       },
@@ -1546,6 +1556,7 @@
     "EMPLOYEE"                   : "Gestion Employés",
     "ENTERPRISE"                 : "Entreprise",
     "EXCHANGE"                   : "Taux de change",
+    "FEE_CENTER"                 : "Centres des Frais",
     "FINANCE"                    : "Finances",
     "FISCAL_YEAR"                : "Année Fiscale",
     "FONCTION"                   : "Gestion Fonctions",
